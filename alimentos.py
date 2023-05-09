@@ -10,5 +10,4 @@ alimentos = [
     {"nombre":"yogur griego", "nutriscore":"c", "alergenos":"leche"},
     {"nombre":"nocilla", "nutriscore":"e", "alergenos":"leche, soja, frutos secos"},
     {"nombre":"agua con gas", "nutriscore":"b", "alergenos":""},
-
 ]
