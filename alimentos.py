@@ -8,5 +8,4 @@ alimentos = [
     {"nombre":"corn flakes", "nutriscore":"b", "alergenos":"gluten, frutos secos, cacahuetes, soja, sesamo"},
     {"nombre":"yogur natural", "nutriscore":"a", "alergenos":"leche"},
     {"nombre":"yogur griego", "nutriscore":"c", "alergenos":"leche"},
-    
 ]
