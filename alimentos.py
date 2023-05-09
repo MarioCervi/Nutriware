@@ -5,4 +5,6 @@ alimentos = [
     {"nombre":"avecrem de verdura", "nutriscore":"d", "alergenos":"huevos, soja, apio"},
     {"nombre":"cocacola zero", "nutriscore":"b", "alergenos":""},
     {"nombre":"cocacola", "nutriscore":"e", "alergenos":""},
+
+    "adios"
 ]
