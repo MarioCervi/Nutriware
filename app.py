@@ -14,7 +14,9 @@ def buscador():
         for a in alimentos:
             if a["nombre"] == alimento:
                 nutriscore = a["nutriscore"]
-                return nutriscore
+                alergenos = a["alergenos"]
+                return nutriscore, alergenos
+            
     return render_template("buscador.html")
 
 if __name__ == "__main__":
