@@ -1,0 +1,8 @@
+1-Haces lo cambios en tu Branch local (VictorS, MarioC...)
+2- Haces git merge main para traerte todo lo que hay en main y solcuionas los probelams
+3- Haces git checkout main para moverte a main
+4- Estando en main haces git merge VictorS
+5- Se actualiza en main todo el contenido y lo subes haciedo un PUSH.
+
+
+6- Si quieres bajarte al main de tu PC lo que otro ha subido tienes que hacer un pull 
