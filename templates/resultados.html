@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>  
+    <a href="{{ url_for('buscador') }}">
+    <button type="button">Volver al buscador</button>
+    </a>
+
+  <head>
+    <title>Resultado de búsqueda</title>
+  </head>
+  <body>
+    <h1>Nombre:</h1>
+    <p>{{ a }}</p>
+    <h1>NutriScore:</h1>
+    <p>{{ nutriscore }}</p>
+    <h1>Alergenos:</h1>
+    {% if alergenos %}
+      <ul>
+        {% for alergeno in alergenos.split(", ") %}
+          <li>{{ alergeno }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Este alimento no contiene alérgenos.</p>
+    {% endif %}
+  </body>
+</html>
