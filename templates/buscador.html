@@ -1,14 +1,10 @@
-<html>
-    <head>
-        <title>Nutriware APP</title>
-    </head>
-    <body>
+{% block title %}<title>Nutriware APP</title>{% endblock %}
+
+{% block body %}
         <form action="" method="post">
-            <label for="buscador">Introduce alimento</label>
+            <label for="buscador">Introduce un alimento</label>
             <br>
             <input id="buscador" type="text" name="buscador">
             <br>
             <input type="submit" value="Buscar">
-        </form>
-    </body>
-</html>
+{% endblock %}

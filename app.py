@@ -7,7 +7,7 @@ from alimentos import alimentos
 
 app = Flask(__name__)
 
-#Configuración para inicio de sesión con google:
+# Configuración para inicio de sesión con google:
 app.secret_key = "nutriware-secret-key"
 blueprint = make_google_blueprint(
     client_id="534885315451-nlatqmtcrsvboq3jjjntgik1u71364g9.apps.googleusercontent.com",
@@ -22,8 +22,9 @@ def index():
         return render_template("index.html")
     else:
         resp = google.get("/oauth2/v2/userinfo")
-        assert resp.ok, resp.text
-        return render_template("buscador.html", email=resp.json()["email"])
+        if resp.ok =="true":
+            return "bien"
+    return render_template("buscador.html")
 
 @app.route("/buscador/", methods=["GET", "POST"])
 def buscador():
