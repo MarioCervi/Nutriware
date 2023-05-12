@@ -4,6 +4,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 from flask import Flask, render_template, jsonify, request, url_for, redirect
 from flask_dance.contrib.google import make_google_blueprint, google
 from alimentos import alimentos
+import similitudes
 
 app = Flask(__name__)
 
@@ -30,10 +31,15 @@ def index():
 def buscador():
     if request.method == "POST":
         alimento = request.form["buscador"]
+        dict = similitudes.mostrar_similitudes(alimento) # aqui pasarle el argumento "alimento"
         for a in alimentos:
             if a["nombre"] == alimento:
                 nutriscore = a["nutriscore"]
-                return nutriscore
+                alergenos = a["alergenos"]
+                return render_template("resultados.html", nutriscore=nutriscore, alergenos=alergenos, a=alimento, dict=dict)
+      
+            #else:
+                #return render_template("relacionados.html", dict=dict)
     return render_template("buscador.html")
 
 if __name__ == "__main__":
