@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>  
+    <a href="{{ url_for('buscador') }}">
+    <button type="button">Volver al buscador</button>
+    </a>
+
+  <head>
+    <title>Productos Relacionados</title>
+  </head>
+  <body>
+    <h1>No se han encontrado resultados. Quizá quiso decir:</h1>
+    <ul>
+        {% for producto in dict %}
+          <li>{{ producto }}</li>
+        {% endfor %}
+    </ul>
+
+  </body>
+</html>

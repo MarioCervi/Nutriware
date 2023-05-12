@@ -2,3 +2,4 @@ Flask==1.1.2
 flask-dance==3.3.0
 requests==2.25.1
 oauthlib==3.1.0
+hermetrics==0.1.13

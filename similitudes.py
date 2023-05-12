@@ -21,10 +21,12 @@ def mostrar_similitudes(alimento_introducido):
 
     for producto in listadoAlimentos:
 
-        similitud = ham.similarity(producto, busqueda_usuario) # devuelve una cifra de similitud
-        #print(similitud)
-        similitudes.append((producto, similitud))
-        #print(similitudes)
+        if producto != busqueda_usuario: # que no muestre como similar el producto que acaba de introducir el user
+
+            similitud = ham.similarity(producto, busqueda_usuario) # devuelve una cifra de similitud
+            #print(similitud)
+            similitudes.append((producto, similitud))
+            #print(similitudes)
 
     # reverse=True porque sino se ordena automaticamente de menos similar a mas similar
     # similitudes muestra el nombre del producto y su cifra de similitud, nos interesa
