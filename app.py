@@ -31,15 +31,15 @@ app = Flask(__name__)
 def buscador():
     if request.method == "POST":
         alimento = request.form["buscador"]
-        dict = similitudes.mostrar_similitudes(alimento) # aqui pasarle el argumento "alimento"
+        dict = similitudes.mostrar_similitudes(alimento) 
         for a in alimentos:
             if a["nombre"] == alimento:
                 nutriscore = a["nutriscore"]
                 alergenos = a["alergenos"]
                 return render_template("resultados.html", nutriscore=nutriscore, alergenos=alergenos, a=alimento, dict=dict)
       
-            #else:
-                #return render_template("relacionados.html", dict=dict)
+        
+        return render_template("relacionados.html", dict2=dict)
     return render_template("buscador.html")
 
 if __name__ == "__main__":
