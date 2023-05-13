@@ -4,7 +4,7 @@
 from flask import Flask, render_template, jsonify, request, url_for, redirect
 # from flask_dance.contrib.google import make_google_blueprint, google
 from alimentos import alimentos
-import similitudes
+import funciones
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ app = Flask(__name__)
 # @app.route("/")
 # def index():
 #     if not google.authorized:
-#         return render_template("index.html")
+        # return render_template("index.html")
 #     else:
 #         resp = google.get("/oauth2/v2/userinfo")
 #         if resp.ok =="true":
@@ -31,15 +31,12 @@ app = Flask(__name__)
 def buscador():
     if request.method == "POST":
         alimento = request.form["buscador"]
-        dict = similitudes.mostrar_similitudes(alimento) 
-        for a in alimentos:
-            if a["nombre"] == alimento:
-                nutriscore = a["nutriscore"]
-                alergenos = a["alergenos"]
-                return render_template("resultados.html", nutriscore=nutriscore, alergenos=alergenos, a=alimento, dict=dict)
-      
+        #  Busca los alimentos que sintacticamente mas se parezcan al que se ha buscado
+        dict = funciones.mostrar_similitudes(alimento) 
         
-        return render_template("relacionados.html", dict2=dict)
+        # Busca tanto el nutriscore como los alergenos del producto buscado
+        answer = funciones.resultado_busqueda(alimento, dict)
+        return answer
     return render_template("buscador.html")
 
 if __name__ == "__main__":
