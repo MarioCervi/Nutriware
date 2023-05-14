@@ -1,9 +1,13 @@
 {% extends "template.html" %}
 
 {% block title %}
-  <title>Nutriware APP</title>
+    <title>Nutriware APP</title>
 {% endblock %}
 {% block body %}
-  <h1>Debes iniciar sesión antes de continuar</h1>
-  <a href="{{ url_for('google.login') }}"><button>Google login</button></a>
+    <div>
+        <h1 style="text-align: center">Debes iniciar sesión antes de continuar:</h1>
+        <a href="google/">
+            <button>Google login</button>
+        </a>
+    </div>
 {% endblock %}

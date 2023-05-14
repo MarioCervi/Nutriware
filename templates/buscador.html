@@ -4,9 +4,14 @@
 {% endblock %}
 
 {% block body %}
-    <form action="" method="post">
-        <label for="buscador">Introduce un alimento:</label>
-        <input id="buscador" type="text" name="buscador">
-        <input type="submit" value="Buscar" class="search">
-    </form>
+    <div>
+        <form action="" method="post">
+            <label for="buscador" style="text-align: center">Introduce un alimento:</label>
+            <input id="buscador" type="text" name="buscador" style="text-align: center">
+            <input type="submit" value="Buscar" class="search">
+        </form>
+        <div>
+            <a href="/cerrar-sesion/" style="color: white; text-decoration: underline">Cerrar sesión de {{ nombre }}</a>
+        </div>
+    </div>
 {% endblock %}
