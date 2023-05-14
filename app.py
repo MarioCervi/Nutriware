@@ -1,34 +1,64 @@
-# import os
-# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-
-from flask import Flask, render_template, jsonify, request, url_for, redirect
-# from flask_dance.contrib.google import make_google_blueprint, google
-from alimentos import alimentos
+import os
 import funciones
+from flask import Flask, render_template, request, url_for, redirect, session
+from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)
+app.secret_key = os.urandom(12)
+oauth = OAuth(app)
 
-# Configuración para inicio de sesión con google:
-# app.secret_key = "nutriware-secret-key"
-# blueprint = make_google_blueprint(
-#     client_id="534885315451-nlatqmtcrsvboq3jjjntgik1u71364g9.apps.googleusercontent.com",
-#     client_secret="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",
-#     scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"]
-# )
-# app.register_blueprint(blueprint, url_prefix="/login")
+@app.route('/')
+def index():
+    # Si el usuario ya ha iniciado sesion, se le redirige al buscador
+    if 'name' in session:
+        return redirect('/buscador/')
+    return render_template('index.html')
 
-# @app.route("/")
-# def index():
-#     if not google.authorized:
-        # return render_template("index.html")
-#     else:
-#         resp = google.get("/oauth2/v2/userinfo")
-#         if resp.ok =="true":
-#             return "bien"
-#     return render_template("buscador.html")
+@app.route('/google/')
+def google():
+    GOOGLE_CLIENT_ID = "534885315451-nlatqmtcrsvboq3jjjntgik1u71364g9.apps.googleusercontent.com"
+    GOOGLE_CLIENT_SECRET = "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"
+
+    CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
+    oauth.register(
+        name='google',
+        client_id=GOOGLE_CLIENT_ID,
+        client_secret=GOOGLE_CLIENT_SECRET,
+        server_metadata_url=CONF_URL,
+        client_kwargs={
+            'scope': 'openid email profile'
+        }
+    )
+
+    # Redirect to google_auth function
+    redirect_uri = url_for('google_auth', _external=True)
+    print(redirect_uri)
+    return oauth.google.authorize_redirect(redirect_uri)
+
+@app.route('/google/auth')
+def google_auth():
+    #recuperar token y toda la sesión
+    token = oauth.google.authorize_access_token()
+    user_info = token
+    user_email = token['userinfo']['email']
+    user_name = token['userinfo']['name']
+    #guardar en sesion
+    session['email'] = user_email
+    session['name'] = user_name
+    session['info'] = user_info
+    return redirect('/buscador/')
+
 
 @app.route("/buscador/", methods=["GET", "POST"])
 def buscador():
+    #recupero el nombre de la sesión
+    if 'name' not in session:
+        # si no tiene el nombre signigica que no ha iniciado sesión
+        # se le redirige a el login
+        return redirect('/')
+    nombre = session['name']
+    
+    # atiende los métodos
     if request.method == "POST":
         alimento = request.form["buscador"]
         #  Busca los alimentos que sintacticamente mas se parezcan al que se ha buscado
@@ -37,7 +67,17 @@ def buscador():
         # Busca tanto el nutriscore como los alergenos del producto buscado
         answer = funciones.resultado_busqueda(alimento, dict)
         return answer
-    return render_template("buscador.html")
+    return render_template("buscador.html", nombre=nombre)
+
+@app.route("/cerrar-sesion/", methods=["GET"])
+def cerrar_sesion():
+    session.pop('email', None)
+    session.pop('name', None)
+    session.pop('info', None)
+    return redirect('/')
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
