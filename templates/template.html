@@ -1,0 +1,72 @@
+<html>
+    <head>
+            {% block title %}{% endblock %}
+            <style type="text/css">
+                body{
+                    background-color: #252525;
+                    color: white;
+                    font-family: Arial;
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center; 
+                    
+                }
+                h1{
+                    color: #cbcbcb;
+                    font-size: 20px;
+                }
+                ul{
+                    list-style: none;
+                    padding: 0; 
+                }
+
+                div{
+                    text-align: left;
+                    margin: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                a{
+                    display: flex;
+                    justify-content: center;
+                    text-decoration: none;
+                }
+
+                a:hover > button{
+                    background-color: #c9c9c9;
+                }
+
+                button{
+                    width: 30em;
+                    height: 4em; 
+                    border-radius: 5px;
+
+                }
+                form{
+                    width: fit-content;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                form label{
+                    font-size: 30px;
+                }
+                form input{
+                    margin: 0.5em;
+                    width: 30em;
+                    height: 4em; 
+                    border-radius: 5px;
+                    padding-left: 2em;
+                }
+                .search:hover{
+                    background-color: #c9c9c9;
+                }
+
+            </style>
+        </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>

@@ -1,14 +1,12 @@
-<html>
-    <head>
-        <title>Nutriware APP</title>
-    </head>
-    <body>
-        <form action="" method="post">
-            <label for="buscador">Introduce alimento</label>
-            <br>
-            <input id="buscador" type="text" name="buscador">
-            <br>
-            <input type="submit" value="Buscar">
-        </form>
-    </body>
-</html>
+{% extends "template.html" %}
+{% block title %}
+    <title>Nutriware APP</title>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        <label for="buscador">Introduce un alimento:</label>
+        <input id="buscador" type="text" name="buscador">
+        <input type="submit" value="Buscar" class="search">
+    </form>
+{% endblock %}

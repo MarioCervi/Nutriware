@@ -1,0 +1,18 @@
+{% extends "template.html" %}
+
+{% block title %}
+  <title>Productos Relacionados</title>
+{% endblock %}
+{% block body %}
+  <div>
+    <h1>No se han encontrado resultados. Quizá está buscando:</h1>
+    <ul>
+      {% for producto in dict2 %}
+        <li>{{ producto }}</li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('buscador') }}">
+      <button type="button">Volver al buscador</button>
+    </a>
+  </div>
+{% endblock %}
