@@ -74,13 +74,12 @@ def buscador():
         #  Busca los alimentos que sintacticamente mas se parezcan al que se ha buscado
         else :
             alimento = alimento.lower()
-            status = 200
         dict = funciones.mostrar_similitudes(alimento) 
 
         # Busca tanto el nutriscore como los alergenos del producto buscado
         answer = funciones.resultado_busqueda(alimento, dict)
         
-        return answer
+        return answer, 200
     return render_template("buscador.html", nombre=nombre)
 
 @app.route("/cerrar-sesion/", methods=["GET"])

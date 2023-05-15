@@ -13,34 +13,30 @@ class MyTestCase(unittest.TestCase):
         response = self.app.get('/buscador', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
-    ## Prueba que haga login correctamente
-    #def test_correct_login(self):
-    #    response = self.app.post('/login', data = dict(login="kepa", login_form=""), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 200)
-#
-    ## Prueba que se pueda fallar el login
-    #def test_incorrect_login(self):
-    #    response = self.app.post('/login', data = dict(login="maria", login_form=""), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 400)
-#
-    ## Prueba que se hagan transacciones correctas
-    #def test_correct_transaction(self):
-    #    response = self.app.post('/transaction', data = dict(origen="gbgbgbgbgbgbgbgbgbgbgbgbgbgbgb1234", destino="asdasdasdaasdasdasdaasdasdasda1234", cantidad="123"), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 200)
-    #    
-    ## Prueba que se hagan transacciones incorrectas
-    #def test_incorrect_transaction(self):
-    #    response = self.app.post('/transaction', data = dict(origen="asdasdasdaasdasdasdaasdasdasda1234", destino="abl", cantidad="800"), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 400)
-#
-    ## Prueba que si se mete la cantidad correcta de dinero se haga la transaccion correctamente
-    #def test_correct_money(self):
-    #    response = self.app.post('/transaction', data = dict(origen="asdasdasdaasdasdasdaasdasdasda1234", destino="asdasdasdaasdasdasdaasdasdasda1234", cantidad="800"), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 200)
-#
-    ## Prueba que si se mete la cantidad incorrecta de dinero no se haga la transaccion correctamente
-    #def test_incorrect_money(self):
-    #    response = self.app.post('/transaction', data = dict(origen="asdasdasdaasdasdasdaasdasdasda1234", destino="asdasdasdaasdasdasdaasdasdasda1234", cantidad="80000"), follow_redirects=True)
-    #    self.assertEqual(response.status_code, 400)
+    # Prueba que busca alimentos correctamente
+    def test_alimento_correcto(self):
+       response = self.app.post('/buscador', data = dict(buscador="nutella", login_form=""), follow_redirects=True)
+       self.assertEqual(response.status_code, 200)
+       
+    #Prueba que busca alimentos escritos con mayusculas
+    def test_alimento_mayus(self):
+       response = self.app.post('/buscador', data = dict(buscador="NUTELLA", login_form=""), follow_redirects=True)
+       self.assertEqual(response.status_code, 200)
+    
+    #Prueba que busca alimentos escritos con mayusculas y minusculas
+    def test_alimento_mix(self):
+       response = self.app.post('/buscador', data = dict(buscador="NuTeLlA", login_form=""), follow_redirects=True)
+       self.assertEqual(response.status_code, 200)
+       
+    #Prueba de que si introduces un numero se maneja el error.
+    def test_alimento_num(self):
+       response = self.app.post('/buscador', data = dict(buscador="1234", login_form=""), follow_redirects=True)
+       self.assertEqual(response.status_code, 200)
+    
+    #Prueba de que si introduces un simbolo se maneja el error.
+    def test_alimento_simbol(self):
+       response = self.app.post('/buscador', data = dict(buscador="prueba/*/", login_form=""), follow_redirects=True)
+       self.assertEqual(response.status_code, 200)
+       
 if __name__ == '__main__':
     unittest.main()
