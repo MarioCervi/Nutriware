@@ -9,5 +9,12 @@ alimentos = [
     {"nombre":"yogur natural", "nutriscore":"A", "alergenos":"leche"},
     {"nombre":"yogur griego", "nutriscore":"C", "alergenos":"leche"},
     {"nombre":"nocilla", "nutriscore":"E", "alergenos":"leche, soja, frutos secos"},
+    {"nombre":"galletas oreo", "nutriscore":"E", "alergenos":"leche, soja, trigo, gluten"},
+    {"nombre":"gazpacho alvalle", "nutriscore":"A", "alergenos":"gluten"},
+    {"nombre":"atun calvo", "nutriscore":"B", "alergenos":"crustaceos"},
+    {"nombre":"zumosol naranja", "nutriscore":"C", "alergenos":""},
+    {"nombre":"helado maxibon", "nutriscore":"D", "alergenos":"frutos secos, leche"},
+    {"nombre":"aceite carbonell", "nutriscore":"C", "alergenos":""},
+    {"nombre":"garbanzos luengo", "nutriscore":"B", "alergenos":"soja"},
     {"nombre":"agua con gas", "nutriscore":"B", "alergenos":""},
 ]

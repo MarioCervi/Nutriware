@@ -3,10 +3,13 @@ from alimentos import alimentos
 from flask import render_template
 
 def resultado_busqueda(alimento, dict):
+    #buscamos en la lista de alimentos el nombre del alimento buscado
     for a in alimentos:
         if a["nombre"] == alimento:
+            #guardamos tambien su nutriscore y sus alergenos
             nutriscore = a["nutriscore"]
             alergenos = a["alergenos"]
+            #enviamos resultados al template de resultados
             return render_template("resultados.html", nutriscore=nutriscore, alergenos=alergenos, a=alimento, dict=dict)
     return render_template("relacionados.html", dict2=dict)
 
@@ -45,8 +48,8 @@ def mostrar_similitudes(alimento_introducido):
     while tres_similares<3: # MOSTRAR LOS 3 PRODUCTOS MAS PARECIDOS AL INTRODUCIDO POR EL USUARIO
 
         mostrar_productos=(similitudes_ordenadas[tres_similares])
-        # print("PRODUCTO SIMILAR: ") # para ver por la terminal
-        # print(mostrar_productos[0]) # para mostrar solo el nombre y no la cifra
         mostrar_listado.append(mostrar_productos[0])
         tres_similares +=1
+        
+        #retornamos el listado con los 3 mas parecidos para su futuro uso en app.py
     return mostrar_listado

@@ -4,9 +4,21 @@
 {% endblock %}
 
 {% block body %}
-    <form action="" method="post">
-        <label for="buscador">Introduce un alimento:</label>
-        <input id="buscador" type="text" name="buscador">
-        <input type="submit" value="Buscar" class="search">
-    </form>
+    <div>
+        <form action="" method="post">
+            <label for="buscador" >Introduce un alimento:</label>
+            <input id="buscador" type="text" name="buscador" >
+            <input type="submit" value="Buscar" class="search">
+        </form>
+        {% if error_message_1 %}
+            <p class="error" > {{ error_message_1 }} </p>
+        {% endif %}
+        <div>
+        {% if error_message_2 %}
+            <p class="error" > {{ error_message_2 }} </p>
+        {% endif %}
+        <div>
+            <a href="/cerrar-sesion/" class="logout" >Cerrar sesión de {{ nombre }}</a>
+        </div>
+    </div>
 {% endblock %}
