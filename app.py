@@ -1,4 +1,5 @@
 import os
+import re
 import funciones
 from flask import Flask, render_template, request, url_for, redirect, session
 from authlib.integrations.flask_client import OAuth
@@ -61,11 +62,24 @@ def buscador():
     # atiende los métodos
     if request.method == "POST":
         alimento = request.form["buscador"]
-        #  Busca los alimentos que sintacticamente mas se parezcan al que se ha buscado
-        dict = funciones.mostrar_similitudes(alimento) 
         
+        
+        if alimento.isdigit():
+            error_message = "Error, no puedes introducir numeros"
+            return render_template("buscador.html", nombre=nombre, error_message_1=error_message)
+        elif re.search(r"[^a-zA-Z0-9\s]", alimento):
+            error_message = "Error, no puedes introducir simbolos especiales"
+            return render_template("buscador.html", nombre=nombre, error_message_2=error_message)
+
+        #  Busca los alimentos que sintacticamente mas se parezcan al que se ha buscado
+        else :
+            alimento = alimento.lower()
+            status = 200
+        dict = funciones.mostrar_similitudes(alimento) 
+
         # Busca tanto el nutriscore como los alergenos del producto buscado
         answer = funciones.resultado_busqueda(alimento, dict)
+        
         return answer
     return render_template("buscador.html", nombre=nombre)
 
@@ -75,7 +89,6 @@ def cerrar_sesion():
     session.pop('name', None)
     session.pop('info', None)
     return redirect('/')
-
 
 
 

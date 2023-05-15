@@ -6,12 +6,19 @@
 {% block body %}
     <div>
         <form action="" method="post">
-            <label for="buscador" style="text-align: center">Introduce un alimento:</label>
-            <input id="buscador" type="text" name="buscador" style="text-align: center">
+            <label for="buscador" >Introduce un alimento:</label>
+            <input id="buscador" type="text" name="buscador" >
             <input type="submit" value="Buscar" class="search">
         </form>
+        {% if error_message_1 %}
+            <p class="error" > {{ error_message_1 }} </p>
+        {% endif %}
         <div>
-            <a href="/cerrar-sesion/" style="color: white; text-decoration: underline">Cerrar sesión de {{ nombre }}</a>
+        {% if error_message_2 %}
+            <p class="error" > {{ error_message_2 }} </p>
+        {% endif %}
+        <div>
+            <a href="/cerrar-sesion/" class="logout" >Cerrar sesión de {{ nombre }}</a>
         </div>
     </div>
 {% endblock %}
