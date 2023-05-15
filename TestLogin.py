@@ -15,8 +15,8 @@ class TestAuth(unittest.TestCase):
         # Mock the Google auth response
         mock_authorize_access_token.return_value = {
             'userinfo': {
-                'email': 'test@example.com',
-                'name': 'Test User',
+                'email': 'mikel.pablos@opendeusto.es',
+                'name': 'Mikel',
             }
         }
 
@@ -25,8 +25,8 @@ class TestAuth(unittest.TestCase):
             # Test login
             response = c.get('/google/auth', follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(session['email'], 'test@example.com')
-            self.assertEqual(session['name'], 'Test User')
+            self.assertEqual(session['email'], 'mikel.pablos@opendeusto.es')
+            self.assertEqual(session['name'], 'Mikel')
 
             # Test logout
             response = c.get('/cerrar-sesion/')
