@@ -11,3 +11,7 @@ Antes de ejecutar el proyecto es necesario instalar las dependencias del proyect
 Para ejecutar la aplicación con recarga automática de código:
 
 - python -m flask run --reload
+
+Para ejecutar el ficher test login logout:
+
+- python -m unittest TestLogin.py
